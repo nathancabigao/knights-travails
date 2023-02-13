@@ -1,10 +1,12 @@
 # frozen-string-literal: true
 
+require_relative 'knight'
+
 # Instantiates an 8x8 chess board.
 class Board
   def initialize
     # 8x8 board: 8 columns of 8 nils (rows)
-    # Ex. A1 [0, 0], B3 [1, 2]
+    # @board[col][row]: Ex. A1 [0, 0], B3 [1, 2]
     @board = Array.new(8) { Array.new(8) }
   end
 
@@ -18,5 +20,9 @@ class Board
     return false unless dest[0].between?(0, 7) && dest[1].between?(0, 7)
 
     true
+  end
+
+  def add_knight(location)
+    @board[location[0]][location[1]] = Knight.new(location)
   end
 end
