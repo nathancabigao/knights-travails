@@ -3,7 +3,9 @@
 # Instantiates an 8x8 chess board.
 class Board
   def initialize
-    @board = Array.new(8) { Array.new(8) } # 8x8 board: 8 rows of 8 nils (columns)
+    # 8x8 board: 8 columns of 8 nils (rows)
+    # Ex. A1 [0, 0], B3 [1, 2]
+    @board = Array.new(8) { Array.new(8) }
   end
 
   # Given start and dest positions represented as arrays (ex. [0,0], [1,2]), checks if the move is valid
