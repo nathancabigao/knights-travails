@@ -4,10 +4,13 @@ require_relative 'board'
 
 # Instantiates a Knight chess piece
 class Knight
+  attr_accessor :location, :history
+
   MOVES = [[-2, 1], [-1, 2], [1, 2], [2, 1], [2, -1], [1, -2], [-1, -2], [-2, -1]].freeze
 
-  def initialize(location = [0, 0])
+  def initialize(location = [0, 0], history = [])
     @location = location
+    @history = history
   end
 
   # Given the knight's location, returns an array of all the possible moves
