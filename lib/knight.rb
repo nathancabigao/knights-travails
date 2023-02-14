@@ -1,7 +1,5 @@
 # frozen-string-literal: true
 
-require_relative 'board'
-
 # Instantiates a Knight chess piece
 class Knight
   attr_accessor :location, :history

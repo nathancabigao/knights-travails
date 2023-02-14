@@ -22,22 +22,29 @@ class Board
     true
   end
 
-  def add_knight(location)
-    @board[location[0]][location[1]] = Knight.new(location)
-  end
-
   # Takes a starting and ending position for a knight, and prints the shortest path to the ending position
   def knight_moves(start, dest)
     puts 'Not a valid move.' unless valid_move?(start, dest)
-    knight = add_knight(start)
-    make_tree(knight)
+    knight = Knight.new(start)
+    shortest_path_knight = find_shortest_path(knight, dest)
+    puts "You made it in #{shortest_path_knight.history.size - 1} moves! Here's your path:"
+    puts shortest_path_knight.history
   end
 
-  def make_tree(knight, queue = [], history = [])
+  def find_shortest_path(knight, dest)
+    return nil if knight.nil?
+
     # queue/level-order traversal, first match is the lowest depth.
+    queue = []
+    queue << knight
     # add current position to history array (track moves)
     # is the current knight position the dest? if so, return as we have found the path
-    # enqueue possible moves from that position.
-    # visit the next in queue
+    until queue.empty?
+      front = queue.shift
+      front.history << front.location
+      return front if front.location == dest
+
+      front.possible_moves.each { |move| queue << Knight.new(move, front.history) unless front.history.include?(move) }
+    end
   end
 end
